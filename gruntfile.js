@@ -71,7 +71,8 @@ module.exports = grunt => {
                 src: tmpPath.join('/') + '/index.html',
                 titleTarget: /<!--DECK-TITLE-->/,
                 slidesTarget: /<!--DECK-SLIDES-->/,
-                stylesTarget: /<!--DECK-STYLES-->/
+                stylesTarget: /<!--DECK-STYLES-->/,
+                jsTarget: /<!--DECK-JS-->/
             }
         },
 
@@ -157,6 +158,8 @@ module.exports = grunt => {
                 ]
             });
         </script>
+
+        <!--DECK-JS-->
     </body>
 </html>`;
         grunt.file.write(tmpPath.join('/') + '/index.html', htmlContent);
@@ -176,9 +179,11 @@ module.exports = grunt => {
         let slidesTarget = data.slidesTarget;
         let titleTarget = data.titleTarget;
         let stylesTarget = data.stylesTarget;
+        let jsTarget = data.jsTarget;
         let content = deckOption.files;
         let title = deckOption.title || 'Untitled';
         let styles = deckOption.styles || [];
+        let js = deckOption.js || [];
 
         content = content.map(f => {
             return grunt.file.read(f);
@@ -188,10 +193,15 @@ module.exports = grunt => {
             return `<link rel="stylesheet" href="${f}">`;
         });
 
+        let javascripts = js.map(f => {
+            return `<script type="text/javascript" src="${f}"></script>`;
+        });
+
         let srcContent = grunt.file.read(src);
         srcContent = srcContent.replace(slidesTarget, content.join("\n"));
         srcContent = srcContent.replace(titleTarget, title);
         srcContent = srcContent.replace(stylesTarget, stylesheets.join("\n"));
+        srcContent = srcContent.replace(jsTarget, javascripts.join("\n"));
         grunt.file.write(src, srcContent);
     });
 

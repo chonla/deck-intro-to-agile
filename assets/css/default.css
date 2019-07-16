@@ -66,8 +66,16 @@ ul.badges {
 
 .video iframe {
     width: 100%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
 .sixteen-to-nine iframe {
     --aspect-ratio:16/9;
+}
+
+.video .caption {
+    font-size: 14pt;
+    font-style: italic;
+    color: #ccc;
 }
