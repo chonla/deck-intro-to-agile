@@ -1,12 +1,25 @@
-.big {
+.em {
+    color: #3badff;
+}
+
+span.big {
     font-size: 48px;
     font-weight: bold;
 }
 
-.super-big {
+span.super-big {
     text-transform: uppercase;
     font-size: 128px;
     font-weight: bold;
+}
+
+.i-need-some-space-below {
+    margin-bottom: 40px !important;
+}
+
+p.big {
+    font-size: 40px;
+    line-height: 70px;
 }
 
 .author-bar {
@@ -78,4 +91,27 @@ ul.badges {
     font-size: 14pt;
     font-style: italic;
     color: #ccc;
+}
+
+.human {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    background-size: contain;
+    border-radius: 120px;
+    border: 5px solid #fff;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.overlapped-above {
+    margin-top: -120px !important;
 }

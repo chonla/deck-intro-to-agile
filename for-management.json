@@ -12,6 +12,15 @@
     "files": [
         "slides/cover.html",
         "slides/check-in-sabie.html",
-        "slides/video-backward-bicycle.html"
+        "slides/video-backward-bicycle.html",
+        "slides/agile-meaning.html",
+        "slides/agile-is-about-agility-then.html",
+        "slides/stacey.html",
+        "slides/defined-process.html",
+        "slides/empirical-process.html",
+        "slides/empirical-to-defined.html",
+        "slides/natural-selection.html",
+        "slides/survival-of-the-fittest.html",
+        "slides/flow.html"
     ]
 }
