@@ -1,0 +1,12 @@
+{
+    "title": "Sample slide deck",
+    "files": [
+        "slides/slide1.html",
+        "slides/slide2.html",
+        "slides/slide3.html",
+        "slides/slide4.html",
+        "slides/slide5.html",
+        "slides/slide6.html",
+        "slides/slide7.html"
+    ]
+}

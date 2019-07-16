@@ -13,7 +13,6 @@ module.exports = grunt => {
 
         blankIndex: {
             dev: {
-                title: 'Test',
                 theme: 'black'
             }
         },
@@ -65,16 +64,8 @@ module.exports = grunt => {
         injectContent: {
             dev: {
                 src: tmpPath.join('/') + '/index.html',
-                target: /<!--DECK-->/,
-                files: [
-                    'slides/slide1.html',
-                    'slides/slide2.html',
-                    'slides/slide3.html',
-                    'slides/slide4.html',
-                    'slides/slide5.html',
-                    'slides/slide6.html',
-                    'slides/slide7.html'
-                ]
+                titleTarget: /<!--DECK-TITLE-->/,
+                slidesTarget: /<!--DECK-SLIDES-->/
             }
         },
 
@@ -90,7 +81,7 @@ module.exports = grunt => {
 
         watch: {
             js: {
-                files: [ 'gruntfile.js' ],
+                files: [ 'gruntfile.js', '*.json' ],
                 tasks: [ 'rebundle' ]
             },
             html: {
@@ -114,7 +105,7 @@ module.exports = grunt => {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <title>${data.title}</title>
+        <title><!--DECK-TITLE--></title>
 
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/reveal.css">
@@ -135,7 +126,7 @@ module.exports = grunt => {
     <body>
         <div class="reveal">
             <div class="slides">
-                <!--DECK-->
+                <!--DECK-SLIDES-->
             </div>
         </div>
 
@@ -160,18 +151,28 @@ module.exports = grunt => {
     });
 
     grunt.registerMultiTask('injectContent', 'Inject multiple files content into a file', () => {
+        let deck = grunt.option('deck') || '';
+        if (deck === '') {
+            grunt.fail.fatal('No deck specified');
+        }
+
+        let deckOption = grunt.file.readJSON(deck);
+
         let data = grunt.task.current.data;
 
         let src = data.src;
-        let target = data.target;
-        let content = data.files;
+        let slidesTarget = data.slidesTarget;
+        let titleTarget = data.titleTarget;
+        let content = deckOption.files;
+        let title = deckOption.title || 'Untitled';
 
         content = content.map(f => {
             return grunt.file.read(f);
         });
 
         let srcContent = grunt.file.read(src);
-        srcContent = srcContent.replace(target, content.join("\n"));
+        srcContent = srcContent.replace(slidesTarget, content.join("\n"));
+        srcContent = srcContent.replace(titleTarget, title);
         grunt.file.write(src, srcContent);
     });
 
