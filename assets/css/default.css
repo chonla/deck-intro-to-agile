@@ -2,11 +2,13 @@
     font-size: 48px;
     font-weight: bold;
 }
+
 .super-big {
     text-transform: uppercase;
     font-size: 128px;
     font-weight: bold;
 }
+
 .author-bar {
     margin-top: 50px;
 }
@@ -60,4 +62,12 @@ ul.badges {
 
 .badge:first-child {
     margin-left: 0px;
+}
+
+.video iframe {
+    width: 100%;
+}
+
+.sixteen-to-nine iframe {
+    --aspect-ratio:16/9;
 }

@@ -6,7 +6,12 @@
     "styles": [
         "assets/css/default.css"
     ],
+    "js": [
+        "assets/js/aspecty.js"
+    ],
     "files": [
-        "slides/cover.html"
+        "slides/cover.html",
+        "slides/check-in-sabie.html",
+        "slides/video-backward-bicycle.html"
     ]
 }
