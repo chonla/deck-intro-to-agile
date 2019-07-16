@@ -1,0 +1,9 @@
+{
+    "title": "Introduction to Agile for Managemennt",
+    "assets": [
+        "assets/**"
+    ],
+    "files": [
+        "slides/cover.html"
+    ]
+}
