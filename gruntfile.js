@@ -70,7 +70,8 @@ module.exports = grunt => {
             dev: {
                 src: tmpPath.join('/') + '/index.html',
                 titleTarget: /<!--DECK-TITLE-->/,
-                slidesTarget: /<!--DECK-SLIDES-->/
+                slidesTarget: /<!--DECK-SLIDES-->/,
+                stylesTarget: /<!--DECK-STYLES-->/
             }
         },
 
@@ -87,6 +88,10 @@ module.exports = grunt => {
         watch: {
             js: {
                 files: [ 'gruntfile.js', '*.json' ],
+                tasks: [ 'rebundle' ]
+            },
+            assets: {
+                files: root.map(path => path + '/assets/**'),
                 tasks: [ 'rebundle' ]
             },
             html: {
@@ -118,6 +123,8 @@ module.exports = grunt => {
 
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!--DECK-STYLES-->
 
         <!-- Printing and PDF exports -->
         <script>
@@ -168,16 +175,23 @@ module.exports = grunt => {
         let src = data.src;
         let slidesTarget = data.slidesTarget;
         let titleTarget = data.titleTarget;
+        let stylesTarget = data.stylesTarget;
         let content = deckOption.files;
         let title = deckOption.title || 'Untitled';
+        let styles = deckOption.styles || [];
 
         content = content.map(f => {
             return grunt.file.read(f);
         });
 
+        let stylesheets = styles.map(f => {
+            return `<link rel="stylesheet" href="${f}">`;
+        });
+
         let srcContent = grunt.file.read(src);
         srcContent = srcContent.replace(slidesTarget, content.join("\n"));
         srcContent = srcContent.replace(titleTarget, title);
+        srcContent = srcContent.replace(stylesTarget, stylesheets.join("\n"));
         grunt.file.write(src, srcContent);
     });
 

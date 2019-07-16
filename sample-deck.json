@@ -3,6 +3,9 @@
     "assets": [
         "assets/**"
     ],
+    "styles": [
+        "assets/css/default.css"
+    ],
     "files": [
         "slides/slide1.html",
         "slides/slide2.html",

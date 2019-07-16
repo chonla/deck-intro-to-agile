@@ -19,6 +19,12 @@ Use `npm run serve --deck=sample-deck.json` if you install deck with npm or `yar
 ```
 {
     "title": "Your deck title",
+    "assets": [
+        "assets/**"
+    ],
+    "styles": [
+        "assets/css/default.css"
+    ],
     "files": [
         "slides/file1",
         "slides/file2",
@@ -28,7 +34,9 @@ Use `npm run serve --deck=sample-deck.json` if you install deck with npm or `yar
 ```
 
 * `title` is your deck title
-* `files` is list of your slide files. Each file will be placed as how you order.
+* `assets` is a list of your assets to be used in your slides.
+* `styles` is additional style sheets to be embed in your presentation.
+* `files` is a list of your slide files. Each file will be placed as how you order.
 
 ## License
 
