@@ -10,6 +10,11 @@ module.exports = grunt => {
 
     grunt.initConfig({
         // pkg: grunt.file.readJSON('package.json'),
+        assets: {
+            dev: {
+                target: tmpPath.join('/')
+            }
+        },
 
         blankIndex: {
             dev: {
@@ -176,5 +181,31 @@ module.exports = grunt => {
         grunt.file.write(src, srcContent);
     });
 
-    grunt.registerTask('rebundle', [ 'mkdir:dev', 'clean:dev', 'copy:dev', 'blankIndex:dev', 'injectContent:dev' ]);
+    grunt.registerMultiTask('assets', 'Transfer assets file into a directory', () => {
+        let deck = grunt.option('deck') || '';
+        if (deck === '') {
+            grunt.fail.fatal('No deck specified');
+        }
+
+        let deckOption = grunt.file.readJSON(deck);
+
+        let data = grunt.task.current.data;
+        let assets = deckOption.assets || [];
+
+        if (assets === []) {
+            return;
+        }
+
+        let files = grunt.file.expand(assets);
+
+        files.forEach(f => {
+            if (grunt.file.exists(f)) {
+                grunt.file.copy(f, `${data.target}/${f}`);
+            } else {
+                grunt.fail.warn(`Unable to copy a file. File '${f}' does not exist.`);
+            }
+        });
+    });
+
+    grunt.registerTask('rebundle', [ 'mkdir:dev', 'clean:dev', 'copy:dev', 'blankIndex:dev', 'injectContent:dev', 'assets:dev' ]);
 };

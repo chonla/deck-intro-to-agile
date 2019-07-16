@@ -1,5 +1,8 @@
 {
     "title": "Sample slide deck",
+    "assets": [
+        "assets/**"
+    ],
     "files": [
         "slides/slide1.html",
         "slides/slide2.html",
