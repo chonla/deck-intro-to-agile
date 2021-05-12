@@ -16,7 +16,7 @@
     "grunt-html-build": "^0.7.1",
     "grunt-mkdir": "^1.0.0",
     "load-grunt-tasks": "^5.0.0",
-    "reveal.js": "^3.8.0"
+    "reveal.js": "^3.9.2"
   },
   "dependencies": {}
 }
